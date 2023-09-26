@@ -258,3 +258,122 @@ network_settings:
   type: STANDARD
 placement_policy: {}
 ```
+
+## Task 02
+
+### Create a repo
+
+```bash
+> terraform apply
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+url = "https://github.com/ilya-siluyanov/Pwd9000-Demo-Repo-2022"
+```
+
+### Import the repo
+
+```bash
+> TF_VAR_github_token=... terraform import github_repository.devops-core-course-labs devops-core-course-labs
+(`terraform.tfstate` file was generated)
+> 
+...
+# github_repository.devops-core-course-labs will be updated in-place
+  ~ resource "github_repository" "devops-core-course-labs" {
+      ~ allow_merge_commit          = true -> false
+      - has_downloads               = true -> null
+      - has_projects                = true -> null
+      - has_wiki                    = true -> null
+...
+```
+
+## Best practises
+
+- Naming conventions (don't repeat resource type in resource name, etc.)
+- Use outputs
+- Use formatters and validators
+
+## Bonus task
+
+```bash
+> TF_VAR_github_token=... terraform plan
+data.github_user.self: Reading...
+github_repository.devops-core-course-labs: Refreshing state... [id=devops-core-course-labs]
+data.github_user.self: Read complete after 1s [id=28011655]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # github_team.devs will be created
+  + resource "github_team" "devs" {
+      + create_default_maintainer = true
+      + etag                      = (known after apply)
+      + id                        = (known after apply)
+      + members_count             = (known after apply)
+      + name                      = "Developers"
+      + node_id                   = (known after apply)
+      + privacy                   = "secret"
+      + slug                      = (known after apply)
+    }
+
+  # github_team.ops will be created
+  + resource "github_team" "ops" {
+      + create_default_maintainer = true
+      + etag                      = (known after apply)
+      + id                        = (known after apply)
+      + members_count             = (known after apply)
+      + name                      = "Operation managers"
+      + node_id                   = (known after apply)
+      + privacy                   = "secret"
+      + slug                      = (known after apply)
+    }
+
+  # github_team_membership.devs-ilya will be created
+  + resource "github_team_membership" "devs-ilya" {
+      + etag     = (known after apply)
+      + id       = (known after apply)
+      + role     = "maintainer"
+      + team_id  = (known after apply)
+      + username = "ilya-siluyanov"
+    }
+
+  # github_team_membership.ops-ilya will be created
+  + resource "github_team_membership" "ops-ilya" {
+      + etag     = (known after apply)
+      + id       = (known after apply)
+      + role     = "member"
+      + team_id  = (known after apply)
+      + username = "ilya-siluyanov"
+    }
+
+  # github_team_repository.devops-core-course-labs-devs will be created
+  + resource "github_team_repository" "devops-core-course-labs-devs" {
+      + etag       = (known after apply)
+      + id         = (known after apply)
+      + permission = "write"
+      + repository = "devops-core-course-labs"
+      + team_id    = (known after apply)
+    }
+
+  # github_team_repository.devops-core-course-labs-ops will be created
+  + resource "github_team_repository" "devops-core-course-labs-ops" {
+      + etag       = (known after apply)
+      + id         = (known after apply)
+      + permission = "read"
+      + repository = "devops-core-course-labs"
+      + team_id    = (known after apply)
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+> terraform apply
+...
+Outputs:
+
+url = "https://github.com/test-organization-devops-course/devops-core-course-labs"
+```
+
+![Setuped teams](./teams.jpeg)
