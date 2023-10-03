@@ -2,6 +2,7 @@
 
 ## Overview
 
+
 The application provides a storage of text notes.
 
 ## Usage
@@ -46,6 +47,7 @@ In order to build and launch the app, there are some steps:
     ```bash
     > curl http://localhost:8000/notes/0197e693-9abc-417c-b281-eacc3e1a4ecf
     {"id":"0197e693-9abc-417c-b281-eacc3e1a4ecf","text":"abcd","created_at":"2023-09-16T18:14:08.990677Z"}
+
     ```
 
 Help is also available:

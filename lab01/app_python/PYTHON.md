@@ -44,7 +44,6 @@ README.md:10 MD032/blanks-around-lists
     [Context: "1. Install [npm](https://docs...."]
 ```
 
-
 ## Unit tests
 
 Unit tests check test a repository to persist notes (`test_repo.py`) and endpoints correct work (`test_endpoints.py`)
