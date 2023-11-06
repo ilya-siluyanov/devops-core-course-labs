@@ -1,0 +1,5 @@
+dependencies:
+  - role: docker
+
+vars:
+  web_app_full_wipe: "{{ web_app_full_wipe }}"

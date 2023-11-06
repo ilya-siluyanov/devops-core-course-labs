@@ -1,0 +1,9 @@
+- hosts: all
+  become: true
+  roles:
+    - web_app
+  vars:
+    app_name: app_python
+    docker_image: ilyasiluyanov/app_python:dev
+    host_port: 8000
+    project_root: "/opt/{{ app_name }}"

@@ -1,0 +1,9 @@
+- hosts: all
+  become: true
+  roles:
+    - web_app
+  vars:
+    app_name: app_rust
+    docker_image: ilyasiluyanov/app_rust:dev
+    host_port: 8001
+    project_root: "/opt/{{ app_name }}"

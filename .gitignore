@@ -1,6 +1,8 @@
+.vscode
 venv
 target
 __pycache__
+geerlingguy.docker
 .terraform
 terraform.tfstate
 .terraform.lock.hcl

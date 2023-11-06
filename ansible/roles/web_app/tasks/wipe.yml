@@ -1,0 +1,23 @@
+---
+- name: Stop service
+  community.docker.docker_compose:
+    project_src: "{{ project_root }}"
+    state: absent
+    remove_images: all
+  tags:
+    - app_stop
+
+
+- name: ensures "{{ project_root }}" removed
+  file: 
+    path: "{{ project_root }}"
+    state: absent
+  tags:
+    - cleanup_template
+
+- name: Logout from docker
+  no_log: true
+  community.docker.docker_login:
+    state: absent
+  tags:
+    - logout

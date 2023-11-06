@@ -1,7 +1,0 @@
-- hosts: all
-  become: true
-  vars:
-    docker_users:
-      - ilyasiluyanov
-  roles:
-    - geerlingguy.docker

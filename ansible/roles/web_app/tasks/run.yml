@@ -1,0 +1,27 @@
+---
+- name: docker-authorize
+  # no_log: true
+  community.docker.docker_login:
+    state: present
+    username: "{{ docker_username }}"
+    password: "{{ docker_password }}"
+  tags:
+    - login
+- name: ensures "{{ project_root }}" dir exists
+  file: 
+    path: "{{ project_root }}"
+    state: directory
+  tags:
+    - template-compose
+- name: Template docker-compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ project_root }}/docker-compose.yml"
+  tags:
+    - template-compose
+- name: Start service
+  community.docker.docker_compose:
+    project_src: "{{ project_root }}"
+    pull: true
+  tags:
+    - app_start
