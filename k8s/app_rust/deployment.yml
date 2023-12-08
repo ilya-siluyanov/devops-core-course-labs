@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-rust
+  labels:
+    app: app-rust
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-rust
+  template:
+    metadata:
+      labels:
+        app: app-rust
+    spec:
+      containers:
+        - name: app-rust
+          image: ilyasiluyanov/app_rust:dev
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000

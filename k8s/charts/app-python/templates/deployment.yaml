@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-python
+  labels:
+    app: app-python
+    {{- include "library-chart.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: app-python
+      {{- include "library-chart.labels" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        app: app-python
+        {{- include "library-chart.labels" . | indent 8 }}
+    spec:
+      containers:
+        - name: app-python
+          image: ilyasiluyanov/app_python:dev
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.containerPort }}

@@ -11,3 +11,4 @@ terraform.tfstate.backup
 .vscode
 ansible/roles/geerlingguy.docker/
 *volume*
+*.tgz

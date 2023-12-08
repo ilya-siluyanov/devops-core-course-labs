@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-rust
+spec:
+  selector:
+    app: app-rust
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 80
+      targetPort: {{ .Values.containerPort }}
