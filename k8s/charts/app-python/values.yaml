@@ -4,3 +4,4 @@
 
 replicaCount: 3
 containerPort: 8000
+labno: 11

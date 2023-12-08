@@ -13,13 +13,27 @@ spec:
       {{- include "library-chart.labels" . | indent 6 }}
   template:
     metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/agent-inject-status: 'update'
+        vault.hashicorp.com/role: 'lab11-reader'
+        vault.hashicorp.com/agent-inject-secret-labno: 'internal/lab11/secrets'
       labels:
         app: app-python
         {{- include "library-chart.labels" . | indent 8 }}
     spec:
+      serviceAccountName: lab11-reader
       containers:
         - name: app-python
           image: ilyasiluyanov/app_python:dev
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.containerPort }}
+{{ include "app.env" . | indent 10 }}
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
