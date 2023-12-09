@@ -17,9 +17,32 @@ spec:
         app: app-python
         {{- include "library-chart.labels" . | indent 8 }}
     spec:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - name: app-python
           image: ilyasiluyanov/app_python:dev
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.containerPort }}
+          volumeMounts:
+            - name: lab12-config
+              mountPath: /app-python/config.json
+              subPath: config.json
+            - name: visits-storage
+              mountPath: /app_python/volumes
+          env:
+            - name: labnofromcm
+              valueFrom:
+                configMapKeyRef:
+                  name: envfromconfigmap
+                  key: labnofromcm
+
+      volumes:
+        - name: lab12-config
+          configMap:
+            name: lab12-config
+        - name: visits-storage
+          persistentVolumeClaim:
+            claimName: visits-pvc

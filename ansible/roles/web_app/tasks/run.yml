@@ -19,6 +19,13 @@
     dest: "{{ project_root }}/docker-compose.yml"
   tags:
     - template-compose
+- name: Ensure visits is mounted
+  ansible.builtin.file:
+    path: '{{ project_root }}/volumes/visits'
+    state: touch
+    mode: a+rw
+  tags:
+    - template-compose
 - name: Start service
   community.docker.docker_compose:
     project_src: "{{ project_root }}"

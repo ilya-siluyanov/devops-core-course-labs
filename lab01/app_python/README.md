@@ -100,3 +100,7 @@ For each commit there is a pipeline with:
 - Snyk vulnerability scanner
 - test job
 - build and push docker image job
+
+## Volumes
+
+At the `/app_python/volumes/visits` there is a file which stores amount of endpoints visits
