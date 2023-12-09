@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: app-python
   labels:
@@ -7,6 +7,7 @@ metadata:
     {{- include "library-chart.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  podManagementPolicy: "Parallel"
   selector:
     matchLabels:
       app: app-python
