@@ -14,7 +14,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY src src
 RUN RUSTFLAGS=${RUSTFLAGS} cargo build --target ${TARGET_PLATFORM}
 
-FROM alpine:3.18.5
+FROM alpine:3.19.1
 ARG TARGET_PLATFORM
 
 RUN apk --no-cache  update && \
